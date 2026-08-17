@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "qmlib"
+version = "0.1.0"
+description = "A modular and extensible Quantum Machine Learning library."
+requires-python = ">=3.9"
+dependencies = [
+    "pennylane==0.38.0",
+    "autoray<0.8",
+    "numpy<2",
+    "scikit-learn>=1.6,<1.7"
+]
