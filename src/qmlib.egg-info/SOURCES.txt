@@ -11,5 +11,9 @@ src/qmlib/feature_maps/base.py
 src/qmlib/feature_maps/z_feature_map.py
 src/qmlib/feature_maps/zz_feature_map.py
 src/qmlib/kernels/__init__.py
+src/qmlib/kernels/base.py
+src/qmlib/kernels/fidelity.py
 src/qmlib/models/__init__.py
+src/qmlib/models/quantum_classifier.py
 tests/test_feature_maps.py
+tests/test_kernel.py
