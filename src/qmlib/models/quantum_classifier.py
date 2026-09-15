@@ -6,17 +6,25 @@ class QuantumClassifier:
     """
     Quantum-kernel based classifier.
 
-    Uses a quantum kernel to construct the kernel matrix
-    and a classical SVM as the decision model.
+    The classifier uses a quantum kernel to construct
+    the kernel matrix and a classical SVM as the
+    decision model.
+
+    Parameters
+    ----------
+    kernel : QuantumKernel
+        Quantum kernel used to compute similarities.
+
+    C : float
+        SVM regularization parameter.
     """
 
     def __init__(
         self,
-        feature_map,
         kernel,
         C=1.0
     ):
-        self.feature_map = feature_map
+
         self.kernel = kernel
 
         self.classifier = SVC(
@@ -28,6 +36,10 @@ class QuantumClassifier:
         self.is_fitted_ = False
 
     def fit(self, X, y):
+        """
+        Fit the quantum-kernel classifier.
+        """
+
         X = np.asarray(X)
 
         K_train = self.kernel.compute(X)
@@ -43,6 +55,10 @@ class QuantumClassifier:
         return self
 
     def predict(self, X):
+        """
+        Predict labels for new samples.
+        """
+
         self._check_fitted()
 
         X = np.asarray(X)
@@ -52,9 +68,15 @@ class QuantumClassifier:
             self.X_train_
         )
 
-        return self.classifier.predict(K_test)
+        return self.classifier.predict(
+            K_test
+        )
 
     def score(self, X, y):
+        """
+        Compute classification accuracy.
+        """
+
         predictions = self.predict(X)
 
         return np.mean(
@@ -62,7 +84,9 @@ class QuantumClassifier:
         )
 
     def _check_fitted(self):
+
         if not self.is_fitted_:
+
             raise RuntimeError(
                 "QuantumClassifier has not been fitted. "
                 "Call fit() before predict()."
