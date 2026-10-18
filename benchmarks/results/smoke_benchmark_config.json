@@ -1,0 +1,15 @@
+{
+  "dataset": "sklearn.datasets.make_moons",
+  "n_samples": 80,
+  "noise": 0.22,
+  "random_state": 42,
+  "test_size": 0.25,
+  "split_random_state": 42,
+  "quantum_feature_maps": [
+    "ZFeatureMap",
+    "ZZFeatureMap"
+  ],
+  "quantum_qubits": 2,
+  "quantum_execution": "Local simulator through QMLib backend",
+  "purpose": "Smoke test for benchmarking infrastructure; not evidence of quantum advantage."
+}

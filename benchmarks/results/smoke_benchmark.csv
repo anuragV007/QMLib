@@ -1,0 +1,6 @@
+model,family,n_train,n_test,n_features,accuracy,precision,recall,f1,fit_seconds,predict_seconds
+Classical RBF SVM,classical,60,20,2,0.9,0.9,0.9,0.9,0.009707,0.001391
+Logistic Regression,classical,60,20,2,0.9,0.9,0.9,0.9,0.014508,0.000701
+Random Forest,classical,60,20,2,1.0,1.0,1.0,1.0,0.289813,0.020639
+Quantum Z,quantum_simulator,60,20,2,0.9,0.9,0.9,0.9,0.403776,0.242129
+Quantum ZZ,quantum_simulator,60,20,2,0.9,0.9,0.9,0.9,0.59934,0.35831
