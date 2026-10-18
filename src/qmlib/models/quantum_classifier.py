@@ -1,4 +1,5 @@
 import numpy as np
+
 from sklearn.svm import SVC
 
 
@@ -6,14 +7,13 @@ class QuantumClassifier:
     """
     Quantum-kernel based classifier.
 
-    The classifier uses a quantum kernel to construct
-    the kernel matrix and a classical SVM as the
-    decision model.
+    The quantum kernel is used to construct a kernel matrix,
+    while a classical SVM performs the final classification.
 
     Parameters
     ----------
     kernel : QuantumKernel
-        Quantum kernel used to compute similarities.
+        Quantum kernel used by the classifier.
 
     C : float
         SVM regularization parameter.
@@ -22,8 +22,13 @@ class QuantumClassifier:
     def __init__(
         self,
         kernel,
-        C=1.0
+        C: float = 1.0
     ):
+
+        if C <= 0:
+            raise ValueError(
+                "C must be greater than 0."
+            )
 
         self.kernel = kernel
 
@@ -37,10 +42,21 @@ class QuantumClassifier:
 
     def fit(self, X, y):
         """
-        Fit the quantum-kernel classifier.
+        Fit the classifier.
         """
 
         X = np.asarray(X)
+
+        if X.ndim != 2:
+            raise ValueError(
+                "X must be a 2D array."
+            )
+
+        if len(X) != len(y):
+            raise ValueError(
+                "X and y must contain the same "
+                "number of samples."
+            )
 
         K_train = self.kernel.compute(X)
 
@@ -74,7 +90,7 @@ class QuantumClassifier:
 
     def score(self, X, y):
         """
-        Compute classification accuracy.
+        Return classification accuracy.
         """
 
         predictions = self.predict(X)

@@ -2,7 +2,7 @@
 
 **A modular and extensible Quantum Machine Learning library.**
 
-> **Status:** Early development — v0.2.0
+> **Status:** Development — v0.3.0
 
 QMLib is a Python library for constructing Quantum Machine Learning (QML) workflows using modular and interchangeable quantum components.
 

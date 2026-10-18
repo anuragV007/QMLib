@@ -4,12 +4,15 @@ from abc import ABC, abstractmethod
 class Backend(ABC):
     """
     Base interface for quantum execution backends.
+
+    A backend is responsible for providing the execution
+    device used by QML components.
     """
 
     @abstractmethod
     def create_device(self, n_qubits: int):
         """
-        Create and return a quantum device.
+        Create a quantum device.
 
         Parameters
         ----------

@@ -3,16 +3,12 @@ import numpy as np
 from qmlib.feature_maps import (
     ZFeatureMap,
     ZZFeatureMap,
-    PauliFeatureMap
+    PauliFeatureMap,
 )
 
 from qmlib.kernels import FidelityKernel
 from qmlib.models import QuantumClassifier
 
-
-# --------------------------------------------------
-# Example dataset
-# --------------------------------------------------
 
 X = np.array([
     [0.1, 0.2],
@@ -29,64 +25,32 @@ y = np.array([
 ])
 
 
-# --------------------------------------------------
-# Choose feature map
-# --------------------------------------------------
-
+# Change ONLY this component.
 feature_map = ZZFeatureMap(
     n_qubits=2,
     reps=1
 )
 
-
-# --------------------------------------------------
-# Build quantum kernel
-# --------------------------------------------------
-
 kernel = FidelityKernel(
     feature_map=feature_map
 )
 
-
-# --------------------------------------------------
-# Build classifier
-# --------------------------------------------------
-
 model = QuantumClassifier(
     kernel=kernel
 )
-
-
-# --------------------------------------------------
-# Train
-# --------------------------------------------------
 
 model.fit(
     X,
     y
 )
 
-
-# --------------------------------------------------
-# Predict
-# --------------------------------------------------
-
 predictions = model.predict(X)
 
+print("Feature map:")
+print(feature_map.get_config())
 
-print("Feature Map:")
-print(
-    feature_map.get_config()
-)
-
-print()
-
-print("Predictions:")
+print("\nPredictions:")
 print(predictions)
 
-print()
-
-print("Accuracy:")
-print(
-    model.score(X, y)
-)
+print("\nAccuracy:")
+print(model.score(X, y))

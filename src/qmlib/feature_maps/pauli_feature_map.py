@@ -5,12 +5,23 @@ from .base import FeatureMap
 
 class PauliFeatureMap(FeatureMap):
     """
-    Pauli-based quantum feature map.
+    Pauli-rotation based quantum feature map.
 
-    Supported Pauli rotations:
-        - X
-        - Y
-        - Z
+    Parameters
+    ----------
+    n_qubits : int
+        Number of qubits.
+
+    reps : int
+        Number of repetitions.
+
+    paulis : list[str]
+        Pauli rotations to apply.
+
+        Supported:
+        - "X"
+        - "Y"
+        - "Z"
     """
 
     def __init__(
@@ -33,11 +44,7 @@ class PauliFeatureMap(FeatureMap):
                 "paulis must be a list."
             )
 
-        supported = {
-            "X",
-            "Y",
-            "Z"
-        }
+        supported = {"X", "Y", "Z"}
 
         for pauli in paulis:
 
@@ -46,6 +53,11 @@ class PauliFeatureMap(FeatureMap):
                     f"Unsupported Pauli operator: {pauli}. "
                     f"Supported operators are {supported}."
                 )
+
+        if len(paulis) == 0:
+            raise ValueError(
+                "paulis must contain at least one operator."
+            )
 
         self.paulis = paulis
 
@@ -90,7 +102,7 @@ class PauliFeatureMap(FeatureMap):
 
         config.update({
             "name": "PauliFeatureMap",
-            "paulis": self.paulis
+            "paulis": self.paulis,
         })
 
         return config

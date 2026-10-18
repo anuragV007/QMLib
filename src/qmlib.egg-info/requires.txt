@@ -1,4 +1,0 @@
-pennylane==0.38.0
-autoray<0.8
-numpy<2
-scikit-learn<1.7,>=1.6

@@ -5,7 +5,10 @@ from .base import FeatureMap
 
 class ZFeatureMap(FeatureMap):
     """
-    Single-qubit Z-based quantum feature map.
+    Z-based quantum feature map.
+
+    Each classical feature is encoded using a Hadamard
+    gate followed by an RZ rotation.
     """
 
     def circuit(self, x):
@@ -33,8 +36,6 @@ class ZFeatureMap(FeatureMap):
 
         config = super().get_config()
 
-        config.update({
-            "name": "ZFeatureMap"
-        })
+        config["name"] = "ZFeatureMap"
 
         return config

@@ -4,6 +4,9 @@ from abc import ABC, abstractmethod
 class FeatureMap(ABC):
     """
     Base interface for quantum feature maps.
+
+    A feature map defines how a classical feature vector
+    is encoded into a quantum circuit/state.
     """
 
     def __init__(
@@ -11,7 +14,6 @@ class FeatureMap(ABC):
         n_qubits: int,
         reps: int = 1
     ):
-
         if not isinstance(n_qubits, int):
             raise TypeError(
                 "n_qubits must be an integer."
@@ -38,7 +40,12 @@ class FeatureMap(ABC):
     @abstractmethod
     def circuit(self, x):
         """
-        Encode classical data x into a quantum state.
+        Encode a single classical sample into a quantum circuit.
+
+        Parameters
+        ----------
+        x : array-like
+            Classical feature vector.
         """
         raise NotImplementedError
 

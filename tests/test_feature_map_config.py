@@ -1,7 +1,7 @@
 from qmlib.feature_maps import (
     ZFeatureMap,
     ZZFeatureMap,
-    PauliFeatureMap
+    PauliFeatureMap,
 )
 
 

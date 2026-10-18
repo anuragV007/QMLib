@@ -9,20 +9,15 @@ class FidelityKernel(QuantumKernel):
     """
     Quantum fidelity kernel.
 
-    The kernel is defined as:
-
-        K(x, y) = |<phi(x) | phi(y)>|^2
-
-    where phi(.) is the quantum feature map.
+    K(x, y) = |<phi(x) | phi(y)>|^2
 
     Parameters
     ----------
     feature_map : FeatureMap
-        Quantum feature map used to encode classical data.
+        Feature map used to encode the data.
 
     backend : Backend, optional
         Quantum execution backend.
-        Defaults to PennyLaneBackend().
     """
 
     def __init__(
@@ -30,6 +25,7 @@ class FidelityKernel(QuantumKernel):
         feature_map,
         backend=None
     ):
+
         self.feature_map = feature_map
 
         if backend is None:
@@ -43,8 +39,7 @@ class FidelityKernel(QuantumKernel):
 
     def _state(self, x):
         """
-        Encode a single classical sample into
-        a quantum state.
+        Generate the quantum state for one sample.
         """
 
         @qml.qnode(self.device)
@@ -58,22 +53,15 @@ class FidelityKernel(QuantumKernel):
 
     def compute(self, X, Y=None):
         """
-        Compute the quantum kernel matrix.
+        Compute the fidelity kernel matrix.
 
-        Parameters
-        ----------
-        X : array-like
-            First dataset.
+        If Y is None:
 
-        Y : array-like, optional
-            Second dataset.
+            K = K(X, X)
 
-            If Y is None, computes K(X, X).
+        Otherwise:
 
-        Returns
-        -------
-        numpy.ndarray
-            Quantum kernel matrix.
+            K = K(X, Y)
         """
 
         X = np.asarray(X)
@@ -93,9 +81,7 @@ class FidelityKernel(QuantumKernel):
                 "Y must be a 2D array."
             )
 
-        expected_features = (
-            self.feature_map.n_qubits
-        )
+        expected_features = self.feature_map.n_qubits
 
         if X.shape[1] != expected_features:
             raise ValueError(

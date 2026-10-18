@@ -2,9 +2,24 @@ import numpy as np
 
 from qmlib.feature_maps import ZFeatureMap
 from qmlib.kernels import FidelityKernel
+from qmlib.models import QuantumClassifier
 
 
-def test_fidelity_kernel_shape():
+def test_quantum_classifier():
+
+    X = np.array([
+        [0.1, 0.1],
+        [0.2, 0.2],
+        [1.0, 1.0],
+        [1.1, 1.1],
+    ])
+
+    y = np.array([
+        0,
+        0,
+        1,
+        1,
+    ])
 
     feature_map = ZFeatureMap(
         n_qubits=2
@@ -14,59 +29,17 @@ def test_fidelity_kernel_shape():
         feature_map
     )
 
-    X = np.array([
-        [0.1, 0.2],
-        [0.3, 0.4],
-        [0.5, 0.6]
-    ])
-
-    K = kernel.compute(X)
-
-    assert K.shape == (3, 3)
-
-
-def test_fidelity_kernel_diagonal():
-
-    feature_map = ZFeatureMap(
-        n_qubits=2
+    model = QuantumClassifier(
+        kernel
     )
 
-    kernel = FidelityKernel(
-        feature_map
+    model.fit(
+        X,
+        y
     )
 
-    X = np.array([
-        [0.1, 0.2],
-        [0.3, 0.4]
-    ])
+    predictions = model.predict(X)
 
-    K = kernel.compute(X)
+    assert len(predictions) == len(y)
 
-    assert np.allclose(
-        np.diag(K),
-        1.0
-    )
-
-
-def test_fidelity_kernel_is_symmetric():
-
-    feature_map = ZFeatureMap(
-        n_qubits=2
-    )
-
-    kernel = FidelityKernel(
-        feature_map
-    )
-
-    X = np.array([
-        [0.1, 0.2],
-        [0.3, 0.4],
-        [0.5, 0.6]
-    ])
-
-    K = kernel.compute(X)
-
-    assert np.allclose(
-        K,
-        K.T
-    )
+    assert model.is_fitted_

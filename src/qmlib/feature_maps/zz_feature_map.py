@@ -5,7 +5,10 @@ from .base import FeatureMap
 
 class ZZFeatureMap(FeatureMap):
     """
-    Z-based feature map with pairwise ZZ interactions.
+    ZZ-based quantum feature map.
+
+    In addition to single-qubit Z rotations, this feature map
+    introduces pairwise interactions between neighboring features.
     """
 
     def circuit(self, x):
@@ -29,9 +32,7 @@ class ZZFeatureMap(FeatureMap):
                     wires=i
                 )
 
-            for i in range(
-                self.n_qubits - 1
-            ):
+            for i in range(self.n_qubits - 1):
 
                 qml.CNOT(
                     wires=[i, i + 1]
@@ -50,8 +51,6 @@ class ZZFeatureMap(FeatureMap):
 
         config = super().get_config()
 
-        config.update({
-            "name": "ZZFeatureMap"
-        })
+        config["name"] = "ZZFeatureMap"
 
         return config

@@ -2,7 +2,9 @@ from abc import ABC, abstractmethod
 
 
 class QuantumKernel(ABC):
-    """Base interface for quantum kernels."""
+    """
+    Base interface for quantum kernels.
+    """
 
     @abstractmethod
     def compute(self, X, Y=None):
@@ -12,9 +14,10 @@ class QuantumKernel(ABC):
         Parameters
         ----------
         X : array-like
-            First dataset.
+            First set of samples.
+
         Y : array-like, optional
-            Second dataset.
+            Second set of samples.
 
         Returns
         -------
