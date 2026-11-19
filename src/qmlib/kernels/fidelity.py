@@ -126,3 +126,21 @@ class FidelityKernel(QuantumKernel):
                 )
 
         return kernel_matrix
+
+class CachedFidelityKernel(FidelityKernel):
+    """Fidelity kernel that caches statevectors for repeated samples."""
+
+    def __init__(self, feature_map, backend=None):
+        super().__init__(feature_map=feature_map, backend=backend)
+        self._state_cache = {}
+
+    def _state(self, x):
+        x = np.asarray(x, dtype=float)
+        key = x.tobytes()
+        if key not in self._state_cache:
+            self._state_cache[key] = super()._state(x)
+        return self._state_cache[key]
+
+    def clear_cache(self):
+        """Clear all cached statevectors."""
+        self._state_cache.clear()
