@@ -1,0 +1,85 @@
+{
+  "experiment": "NASA SMAP classical RBF One-Class SVM vs QMLib quantum-kernel One-Class SVM",
+  "run_name": "smap_experiment_v4_pilot_diagnostics",
+  "dataset": "NASA SMAP",
+  "seed": 42,
+  "requested_channels": [
+    "A-1"
+  ],
+  "processed_channels": [
+    "A-1"
+  ],
+  "skipped_channels": [],
+  "n_processed_channels": 1,
+  "full_test_timesteps_for_processed_channels": 8640,
+  "full_test_anomalies_for_processed_channels": 85,
+  "evaluation_samples": 32,
+  "evaluation_anomalies": 16,
+  "n_qubits": 16,
+  "n_pca_components": 16,
+  "quantum_feature_map": {
+    "n_qubits": 16,
+    "reps": 1,
+    "name": "ZZFeatureMap"
+  },
+  "quantum_backend": "PennyLane default.qubit",
+  "classical_model": {
+    "name": "sklearn OneClassSVM",
+    "kernel": "rbf",
+    "gamma": "scale",
+    "nu": 0.05
+  },
+  "quantum_model": {
+    "name": "QMLib QuantumOneClassSVM",
+    "kernel": "CachedFidelityKernel",
+    "nu": 0.05
+  },
+  "preprocessing": {
+    "scaler": "StandardScaler",
+    "pca": "PCA(n_components=16, svd_solver='full')",
+    "fit_period": "first 65% of each training sequence",
+    "angle_encoding": "2 * arctan(PCA output)",
+    "same_encoded_inputs_for_both_models": true
+  },
+  "training_protocol": {
+    "reference_period": "first 65% of training sequence",
+    "temporal_gap": "65%-75% of training sequence",
+    "calibration_period": "last 25% of training sequence",
+    "training_data_assumption": "Training sequences are assumed to be predominantly normal.",
+    "reference_sample_limit_per_channel": 16,
+    "calibration_sample_limit_per_channel": 32
+  },
+  "evaluation_protocol": {
+    "sampling": "class-stratified within each channel",
+    "max_normal_samples_per_channel": 16,
+    "max_anomalous_samples_per_channel": 16,
+    "threshold_quantile": 0.99,
+    "threshold_source": "Separate normal calibration scores for each channel and model.",
+    "labels": {
+      "0": "normal",
+      "1": "anomaly"
+    },
+    "interval_convention": "zero-based inclusive endpoints",
+    "warning": "The class-stratified evaluation sample does not preserve the natural anomaly prevalence. Precision, F1 and AP describe this balanced evaluation design and should not be interpreted as deployment metrics at the original SMAP prevalence."
+  },
+  "runtime_seconds": {
+    "ClassicalOneClassSVM_RBF": 0.0012209999999996946,
+    "QuantumOneClassSVM_ZZ": 0.3838737000000001
+  },
+  "software_versions": {
+    "python": "3.9.13",
+    "numpy": "1.26.4",
+    "pandas": "2.3.3",
+    "scikit_learn": "1.6.1",
+    "pennylane": "0.38.0"
+  },
+  "notes": [
+    "v1-v3 files and results are retained unchanged.",
+    "Both methods use identical channel-specific reference, calibration and test observations.",
+    "Scaler and PCA are fitted on training data only.",
+    "Test labels are used only for evaluation and stratified sampling.",
+    "Thresholds are not selected using test labels.",
+    "Quantum state cache is cleared after each channel.",
+    "No quantum advantage is inferred from these experiments."
+  ]
+}

@@ -1,0 +1,3 @@
+model,angle_encoding,n_qubits,reps,threshold_quantile,accuracy,balanced_accuracy,precision,recall,f1,average_precision,threshold,predicted_anomalies,actual_anomalies,seconds
+ZFeatureMap,2*arctan(x),2,1,0.99,0.87,0.49544419134396356,0.0,0.0,0.0,0.1385771526229614,0.49682977401753337,8,122,2.0036943
+ZZFeatureMap,2*arctan(x),2,1,0.99,0.87,0.49544419134396356,0.0,0.0,0.0,0.14157197015048034,0.5598100488810003,8,122,2.7042530000000005

@@ -1,0 +1,224 @@
+{
+  "experiment": "one-step-ahead telemetry anomaly detection",
+  "methods": [
+    "Persistence",
+    "Classical_RBF_KRR",
+    "Quantum_ZZ_KRR"
+  ],
+  "channels": [
+    "P-1",
+    "S-1"
+  ],
+  "windows": [
+    10,
+    25
+  ],
+  "threshold_quantiles": [
+    0.95,
+    0.975,
+    0.99
+  ],
+  "threshold_rule": "Per-method absolute residual quantile from the final 25% of training windows; thresholds are evaluated without refitting models.",
+  "window_input": "Flattened complete multivariate telemetry and command/context rows from the preceding window timesteps.",
+  "target": "Feature 0 at the current timestep.",
+  "preprocessing": "StandardScaler and PCA are fitted on the first 75% of chronological training windows only.",
+  "test_evaluation": "All test timesteps from index window onward, in original order. The first window points are history warm-up and are not scored.",
+  "event_metric": "For each labelled interval, coverage is the fraction of its scored points predicted anomalous. Reported summary is the macro-average across intervals; no any-hit event-recall metric.",
+  "n_qubits": 4,
+  "reps": 1,
+  "max_train_samples": 128,
+  "batch_size": 128,
+  "alpha": 0.01,
+  "numpy_version": "1.26.4",
+  "pandas_version": "2.3.3",
+  "scikit_learn_version": "1.6.1",
+  "dataset_caveat": "The distributed Telemanom arrays were pre-scaled using test-set ranges upstream. This inherited limitation is disclosed; the experiment's additional scaler and PCA are fitted on the model-fit training partition only.",
+  "scope_caveat": "This is a simplified one-step-ahead kernel forecasting experiment inspired by Telemanom, not a reproduction of the original LSTM and nonparametric dynamic thresholding.",
+  "runs": [
+    {
+      "channel": "P-1",
+      "window": 10,
+      "train_shape": [
+        2872,
+        25
+      ],
+      "test_shape": [
+        8505,
+        25
+      ],
+      "feature_count": 25,
+      "fit_training_windows": 2144,
+      "calibration_windows": 718,
+      "quantum_training_samples": 128,
+      "n_qubits": 4,
+      "reps": 1,
+      "alpha": 0.01,
+      "classical_rbf_gamma": 0.25,
+      "pca_explained_variance_ratio_sum": 0.23438134760270582,
+      "threshold_quantiles": [
+        0.95,
+        0.975,
+        0.99
+      ],
+      "threshold_calibration": "Absolute calibration residuals from the final 25% of training windows; each requested quantile is evaluated without refitting.",
+      "anomaly_intervals": [
+        {
+          "start": 2149,
+          "end": 2349,
+          "class": "contextual"
+        },
+        {
+          "start": 3539,
+          "end": 3779,
+          "class": "contextual"
+        },
+        {
+          "start": 4536,
+          "end": 4844,
+          "class": "contextual"
+        }
+      ],
+      "test_anomaly_prevalence_full": 0.08830099941211052,
+      "test_anomaly_prevalence_scored": 0.08840494408475574,
+      "test_warmup_points_not_scored": 10,
+      "quantum_runtime_seconds": 32.288761099999995,
+      "quantum_cache_entries_before_clear": 8927,
+      "quantum_cache_memory_mb": 2.179443359375
+    },
+    {
+      "channel": "P-1",
+      "window": 25,
+      "train_shape": [
+        2872,
+        25
+      ],
+      "test_shape": [
+        8505,
+        25
+      ],
+      "feature_count": 25,
+      "fit_training_windows": 2129,
+      "calibration_windows": 718,
+      "quantum_training_samples": 128,
+      "n_qubits": 4,
+      "reps": 1,
+      "alpha": 0.01,
+      "classical_rbf_gamma": 0.25,
+      "pca_explained_variance_ratio_sum": 0.1744409125082051,
+      "threshold_quantiles": [
+        0.95,
+        0.975,
+        0.99
+      ],
+      "threshold_calibration": "Absolute calibration residuals from the final 25% of training windows; each requested quantile is evaluated without refitting.",
+      "anomaly_intervals": [
+        {
+          "start": 2149,
+          "end": 2349,
+          "class": "contextual"
+        },
+        {
+          "start": 3539,
+          "end": 3779,
+          "class": "contextual"
+        },
+        {
+          "start": 4536,
+          "end": 4844,
+          "class": "contextual"
+        }
+      ],
+      "test_anomaly_prevalence_full": 0.08830099941211052,
+      "test_anomaly_prevalence_scored": 0.08856132075471698,
+      "test_warmup_points_not_scored": 25,
+      "quantum_runtime_seconds": 22.4270676,
+      "quantum_cache_entries_before_clear": 9123,
+      "quantum_cache_memory_mb": 2.227294921875
+    },
+    {
+      "channel": "S-1",
+      "window": 10,
+      "train_shape": [
+        2818,
+        25
+      ],
+      "test_shape": [
+        7331,
+        25
+      ],
+      "feature_count": 25,
+      "fit_training_windows": 2103,
+      "calibration_windows": 705,
+      "quantum_training_samples": 128,
+      "n_qubits": 4,
+      "reps": 1,
+      "alpha": 0.01,
+      "classical_rbf_gamma": 0.25,
+      "pca_explained_variance_ratio_sum": 0.18874715681263018,
+      "threshold_quantiles": [
+        0.95,
+        0.975,
+        0.99
+      ],
+      "threshold_calibration": "Absolute calibration residuals from the final 25% of training windows; each requested quantile is evaluated without refitting.",
+      "anomaly_intervals": [
+        {
+          "start": 5300,
+          "end": 5747,
+          "class": "point"
+        }
+      ],
+      "test_anomaly_prevalence_full": 0.06111035329422998,
+      "test_anomaly_prevalence_scored": 0.06119382598005737,
+      "test_warmup_points_not_scored": 10,
+      "quantum_runtime_seconds": 19.8391869,
+      "quantum_cache_entries_before_clear": 8012,
+      "quantum_cache_memory_mb": 1.9560546875
+    },
+    {
+      "channel": "S-1",
+      "window": 25,
+      "train_shape": [
+        2818,
+        25
+      ],
+      "test_shape": [
+        7331,
+        25
+      ],
+      "feature_count": 25,
+      "fit_training_windows": 2088,
+      "calibration_windows": 705,
+      "quantum_training_samples": 128,
+      "n_qubits": 4,
+      "reps": 1,
+      "alpha": 0.01,
+      "classical_rbf_gamma": 0.25,
+      "pca_explained_variance_ratio_sum": 0.1327779816876398,
+      "threshold_quantiles": [
+        0.95,
+        0.975,
+        0.99
+      ],
+      "threshold_calibration": "Absolute calibration residuals from the final 25% of training windows; each requested quantile is evaluated without refitting.",
+      "anomaly_intervals": [
+        {
+          "start": 5300,
+          "end": 5747,
+          "class": "point"
+        }
+      ],
+      "test_anomaly_prevalence_full": 0.06111035329422998,
+      "test_anomaly_prevalence_scored": 0.06131946345469477,
+      "test_warmup_points_not_scored": 25,
+      "quantum_runtime_seconds": 20.2944234,
+      "quantum_cache_entries_before_clear": 8012,
+      "quantum_cache_memory_mb": 1.9560546875
+    }
+  ],
+  "outputs": {
+    "metrics": "C:\\Users\\anura\\Desktop\\IIT Roorkee\\Sem 3\\Thesis\\QMLib\\experiments\\nasa_smap_msl\\results\\smap_forecasting_threshold_sensitivity_metrics.csv",
+    "predictions": "C:\\Users\\anura\\Desktop\\IIT Roorkee\\Sem 3\\Thesis\\QMLib\\experiments\\nasa_smap_msl\\results\\smap_forecasting_threshold_sensitivity_predictions.csv",
+    "interval_coverage": "C:\\Users\\anura\\Desktop\\IIT Roorkee\\Sem 3\\Thesis\\QMLib\\experiments\\nasa_smap_msl\\results\\smap_forecasting_threshold_sensitivity_interval_coverage.csv"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "dataset": "NASA SMAP",
+  "seed": 42,
+  "channels": 54,
+  "full_test_timesteps": 435826,
+  "full_test_anomalous_timesteps": 55972,
+  "reference_size": 64,
+  "calibration_size": 512,
+  "evaluation_size": 1000,
+  "threshold_quantile": 0.99,
+  "feature_map": {
+    "n_qubits": 2,
+    "reps": 1,
+    "name": "ZFeatureMap"
+  },
+  "pca_explained_variance_ratio": [
+    0.19249594722198252,
+    0.12041832410093642
+  ],
+  "note": "Bounded random test sample; not a full-sequence benchmark. Training arrays are treated as normal."
+}

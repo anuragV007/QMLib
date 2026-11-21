@@ -1,0 +1,55 @@
+{
+  "experiment": "one-step-ahead telemetry anomaly detection",
+  "target_feature": 0,
+  "input_features": "previous multivariate telemetry + command/context window",
+  "fit_calibration_split": "first 75% / final 25% of training windows",
+  "test_evaluation": "chronological; first window rows used as warm-up",
+  "threshold": "99th percentile of absolute calibration residuals",
+  "methods": [
+    "Persistence",
+    "Classical_RBF_KRR",
+    "Quantum_ZZ_KRR"
+  ],
+  "window": 10,
+  "n_qubits": 4,
+  "reps": 1,
+  "max_train_samples": 128,
+  "batch_size": 128,
+  "alpha": 0.01,
+  "channels": [
+    {
+      "channel": "S-1",
+      "train_shape": [
+        2818,
+        25
+      ],
+      "test_shape": [
+        7331,
+        25
+      ],
+      "n_features": 25,
+      "window_size": 10,
+      "fit_window_count": 2103,
+      "calibration_window_count": 705,
+      "quantum_training_samples": 128,
+      "n_qubits": 4,
+      "pca_explained_variance_ratio_sum": 0.18874715681263018,
+      "anomaly_intervals": [
+        [
+          5300,
+          5747
+        ]
+      ],
+      "test_anomaly_prevalence_full": 0.06111035329422998,
+      "test_anomaly_prevalence_scored": 0.06119382598005737,
+      "warmup_test_points_not_scored": 10,
+      "quantum_cache_entries_before_clear": 8012,
+      "quantum_cache_memory_mb": 1.9560546875
+    }
+  ],
+  "numpy_version": "1.26.4",
+  "pandas_version": "2.3.3",
+  "scikit_learn_version": "1.6.1",
+  "important_dataset_caveat": "The original Telemanom data README states telemetry values were pre-scaled using test-set min/max values. This inherited preprocessing limitation is disclosed; this experiment's StandardScaler and PCA are fitted on the model-fit training windows only.",
+  "interpretation_caveat": "This is a simplified one-step-ahead quantum-kernel forecasting experiment inspired by Telemanom. It does not reproduce the original LSTM architecture or its dynamic thresholding method."
+}

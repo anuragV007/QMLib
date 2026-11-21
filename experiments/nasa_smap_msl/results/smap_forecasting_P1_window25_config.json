@@ -1,0 +1,63 @@
+{
+  "experiment": "one-step-ahead telemetry anomaly detection",
+  "target_feature": 0,
+  "input_features": "previous multivariate telemetry + command/context window",
+  "fit_calibration_split": "first 75% / final 25% of training windows",
+  "test_evaluation": "chronological; first window rows used as warm-up",
+  "threshold": "99th percentile of absolute calibration residuals",
+  "methods": [
+    "Persistence",
+    "Classical_RBF_KRR",
+    "Quantum_ZZ_KRR"
+  ],
+  "window": 25,
+  "n_qubits": 4,
+  "reps": 1,
+  "max_train_samples": 128,
+  "batch_size": 128,
+  "alpha": 0.01,
+  "channels": [
+    {
+      "channel": "P-1",
+      "train_shape": [
+        2872,
+        25
+      ],
+      "test_shape": [
+        8505,
+        25
+      ],
+      "n_features": 25,
+      "window_size": 25,
+      "fit_window_count": 2129,
+      "calibration_window_count": 718,
+      "quantum_training_samples": 128,
+      "n_qubits": 4,
+      "pca_explained_variance_ratio_sum": 0.1744409125082051,
+      "anomaly_intervals": [
+        [
+          2149,
+          2349
+        ],
+        [
+          4536,
+          4844
+        ],
+        [
+          3539,
+          3779
+        ]
+      ],
+      "test_anomaly_prevalence_full": 0.08830099941211052,
+      "test_anomaly_prevalence_scored": 0.08856132075471698,
+      "warmup_test_points_not_scored": 25,
+      "quantum_cache_entries_before_clear": 9123,
+      "quantum_cache_memory_mb": 2.227294921875
+    }
+  ],
+  "numpy_version": "1.26.4",
+  "pandas_version": "2.3.3",
+  "scikit_learn_version": "1.6.1",
+  "important_dataset_caveat": "The original Telemanom data README states telemetry values were pre-scaled using test-set min/max values. This inherited preprocessing limitation is disclosed; this experiment's StandardScaler and PCA are fitted on the model-fit training windows only.",
+  "interpretation_caveat": "This is a simplified one-step-ahead quantum-kernel forecasting experiment inspired by Telemanom. It does not reproduce the original LSTM architecture or its dynamic thresholding method."
+}

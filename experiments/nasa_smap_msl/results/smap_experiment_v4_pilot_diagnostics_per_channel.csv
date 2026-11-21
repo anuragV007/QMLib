@@ -1,0 +1,3 @@
+channel,method,n_reference,n_calibration,n_test,n_test_normals,n_test_anomalies,pca_explained_variance,fit_seconds,score_seconds,total_seconds,accuracy,balanced_accuracy,precision,recall,f1,roc_auc,average_precision,threshold,predicted_anomalies,actual_anomalies,tn,fp,fn,tp,state_cache_entries,state_cache_memory_mb
+A-1,ClassicalOneClassSVM_RBF,16,32,32,16,16,1.0,0.0007603999999998834,0.00046059999999981116,0.0012209999999996946,0.5,0.5,0.0,0.0,0.0,0.5,0.53125,0.2696708489136115,0,16,16,0,16,0,,
+A-1,QuantumOneClassSVM_ZZ,16,32,32,16,16,1.0,0.12287390000000009,0.2609998,0.3838737000000001,0.5,0.5,0.0,0.0,0.0,0.5,0.53125,0.266629756158698,0,16,16,0,16,0,9.0,9.0

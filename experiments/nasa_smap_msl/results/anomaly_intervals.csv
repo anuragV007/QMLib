@@ -1,0 +1,106 @@
+channel,spacecraft,class,start_index,end_index_inclusive,length_points
+A-1,SMAP,[point],4690,4774,85
+A-2,SMAP,[contextual],4450,4560,111
+A-3,SMAP,[contextual],4575,4760,186
+A-4,SMAP,[contextual],4550,4660,111
+A-5,SMAP,[point],2750,2800,51
+A-6,SMAP,[point],1890,1930,41
+A-7,SMAP,[contextual],6200,8600,2401
+A-8,SMAP,[contextual],4569,8374,3806
+A-9,SMAP,[contextual],4569,8433,3865
+B-1,SMAP,[point],5060,5130,71
+C-1,MSL,"[point, contextual]",550,750,201
+C-1,MSL,"[point, contextual]",2100,2210,111
+C-2,MSL,"[point, contextual]",290,390,101
+C-2,MSL,"[point, contextual]",1540,1575,36
+D-1,SMAP,[point],5250,8508,3259
+D-11,SMAP,[point],4270,4330,61
+D-12,SMAP,[point],5178,7917,2740
+D-13,SMAP,[point],5070,5230,161
+D-14,MSL,"[point, point]",1630,1650,21
+D-14,MSL,"[point, point]",1800,2000,201
+D-15,MSL,[point],1500,2140,641
+D-16,MSL,[contextual],600,1250,651
+D-2,SMAP,[point],4319,8536,4218
+D-3,SMAP,[point],5225,8500,3276
+D-4,SMAP,[point],5225,8472,3248
+D-5,SMAP,[point],4800,4850,51
+D-6,SMAP,[point],4870,4950,81
+D-7,SMAP,[point],4940,7641,2702
+D-8,SMAP,[point],4370,4420,51
+D-9,SMAP,[point],6250,7405,1156
+E-1,SMAP,"[contextual, contextual]",5000,5030,31
+E-1,SMAP,"[contextual, contextual]",5610,6086,477
+E-10,SMAP,"[contextual, contextual]",5000,5050,51
+E-10,SMAP,"[contextual, contextual]",5601,5871,271
+E-11,SMAP,"[contextual, contextual]",5000,5050,51
+E-11,SMAP,"[contextual, contextual]",5614,5857,244
+E-12,SMAP,"[contextual, contextual]",5610,6141,532
+E-12,SMAP,"[contextual, contextual]",5000,5050,51
+E-13,SMAP,"[contextual, contextual, contextual]",5309,5410,102
+E-13,SMAP,"[contextual, contextual, contextual]",5600,5640,41
+E-13,SMAP,"[contextual, contextual, contextual]",6449,6569,121
+E-2,SMAP,[point],5598,6995,1398
+E-3,SMAP,[point],5094,8306,3213
+E-4,SMAP,[point],5450,8261,2812
+E-5,SMAP,[point],5600,5920,321
+E-6,SMAP,[point],5610,5675,66
+E-7,SMAP,[point],5394,5674,281
+E-8,SMAP,[point],5400,6022,623
+E-9,SMAP,[point],5550,5900,351
+F-1,SMAP,[point],5392,5492,101
+F-2,SMAP,[point],5669,8625,2957
+F-3,SMAP,[contextual],5600,5640,41
+F-4,MSL,[point],2700,2770,71
+F-5,MSL,[point],3550,3700,151
+F-7,MSL,"[contextual, contextual, contextual]",1250,1450,201
+F-7,MSL,"[contextual, contextual, contextual]",2670,2790,121
+F-7,MSL,"[contextual, contextual, contextual]",3325,3425,101
+F-8,MSL,[contextual],1950,2486,537
+G-1,SMAP,[contextual],4770,4890,121
+G-2,SMAP,[point],4030,4070,41
+G-3,SMAP,[point],4200,4250,51
+G-4,SMAP,[point],4690,4720,31
+G-6,SMAP,[point],5600,5700,101
+G-7,SMAP,"[contextual, point, contextual]",3650,3750,101
+G-7,SMAP,"[contextual, point, contextual]",5050,5100,51
+G-7,SMAP,"[contextual, point, contextual]",7560,7675,116
+M-1,MSL,[contextual],1110,2250,1141
+M-2,MSL,[contextual],1110,2250,1141
+M-3,MSL,[contextual],1250,1500,251
+M-4,MSL,[contextual],1250,1500,251
+M-5,MSL,[contextual],1250,1550,301
+M-6,MSL,[point],1850,2030,181
+M-7,MSL,[point],940,1040,101
+P-1,SMAP,"[contextual, contextual, contextual]",2149,2349,201
+P-1,SMAP,"[contextual, contextual, contextual]",4536,4844,309
+P-1,SMAP,"[contextual, contextual, contextual]",3539,3779,241
+P-10,MSL,[point],4590,4720,131
+P-11,MSL,"[point, point]",1778,1898,121
+P-11,MSL,"[point, point]",1238,1344,107
+P-14,MSL,[point],4575,4755,181
+P-15,MSL,[point],1390,1410,21
+P-2,SMAP,[point],5350,6575,1226
+P-2,SMAP,[point],5300,6420,1121
+P-3,SMAP,[point],5401,6736,1336
+P-4,SMAP,"[point, point, point]",950,1080,131
+P-4,SMAP,"[point, point, point]",2150,2350,201
+P-4,SMAP,"[point, point, point]",4770,4880,111
+P-7,SMAP,[contextual],4950,6600,1651
+R-1,SMAP,[point],4510,4590,81
+S-1,SMAP,[point],5300,5747,448
+S-2,MSL,[point],900,910,11
+T-1,SMAP,"[point, contextual]",2399,3898,1500
+T-1,SMAP,"[point, contextual]",6550,6585,36
+T-12,MSL,[contextual],630,750,121
+T-13,MSL,"[contextual, contextual]",690,790,101
+T-13,MSL,"[contextual, contextual]",1900,2050,151
+T-2,SMAP,[point],6840,8624,1785
+T-3,SMAP,"[point, point]",2098,2180,83
+T-3,SMAP,"[point, point]",5200,5300,101
+T-4,MSL,[point],1172,1240,69
+T-5,MSL,[point],1200,1225,26
+T-8,MSL,"[contextual, contextual]",870,930,61
+T-8,MSL,"[contextual, contextual]",1330,1370,41
+T-9,MSL,"[point, point]",780,810,31
+T-9,MSL,"[point, point]",890,970,81

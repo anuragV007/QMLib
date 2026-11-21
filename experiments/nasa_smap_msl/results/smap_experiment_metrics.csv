@@ -1,0 +1,3 @@
+accuracy,balanced_accuracy,precision,recall,f1,average_precision,threshold,predicted_anomalies,actual_anomalies,model,seconds
+0.876,0.49716231555051077,0.0,0.0,0.0,0.142874425197687,0.4406294999099447,5,119,Quantum fidelity kernel,6.1893293
+0.877,0.4977298524404086,0.0,0.0,0.0,0.14274137594699068,5.22807823845844,4,119,Classical nearest-reference distance,0.009993099999999089

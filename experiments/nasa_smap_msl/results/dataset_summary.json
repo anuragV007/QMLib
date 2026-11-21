@@ -1,0 +1,73 @@
+{
+  "dataset_name": "NASA SMAP/MSL Telemanom anomaly benchmark",
+  "data_root": "C:\\Users\\anura\\Desktop\\IIT Roorkee\\Sem 3\\Thesis\\QMLib\\NASA Data",
+  "train_dir": "C:\\Users\\anura\\Desktop\\IIT Roorkee\\Sem 3\\Thesis\\QMLib\\NASA Data\\data\\data\\train",
+  "test_dir": "C:\\Users\\anura\\Desktop\\IIT Roorkee\\Sem 3\\Thesis\\QMLib\\NASA Data\\data\\data\\test",
+  "metadata_file": "C:\\Users\\anura\\Desktop\\IIT Roorkee\\Sem 3\\Thesis\\QMLib\\NASA Data\\labeled_anomalies.csv",
+  "metadata_columns": [
+    "chan_id",
+    "spacecraft",
+    "anomaly_sequences",
+    "class",
+    "num_values"
+  ],
+  "train_array_files": 82,
+  "test_array_files": 82,
+  "unique_array_channels": 82,
+  "train_only_channels": [],
+  "test_only_channels": [],
+  "metadata_only_channels": [],
+  "array_channels_without_metadata": [
+    "T-10"
+  ],
+  "totals": {
+    "train_timesteps": 196746,
+    "test_timesteps": 510225,
+    "train_channels_loaded": 82,
+    "test_channels_loaded": 82,
+    "channels_with_metadata": 81,
+    "metadata_rows": 82
+  },
+  "spacecraft_channel_counts_from_metadata": {
+    "SMAP": 54,
+    "MSL": 27,
+    "unlisted": 1
+  },
+  "anomaly_interval_counts_by_class": {
+    "[point]": 47,
+    "[contextual]": 17,
+    "[point, contextual]": 6,
+    "[point, point]": 8,
+    "[contextual, contextual]": 12,
+    "[contextual, contextual, contextual]": 9,
+    "[contextual, point, contextual]": 3,
+    "[point, point, point]": 3
+  },
+  "anomaly_points_by_class_before_merging": {
+    "[point]": 41180,
+    "[contextual]": 16687,
+    "[point, contextual]": 1985,
+    "[point, point]": 746,
+    "[contextual, contextual]": 2062,
+    "[contextual, contextual, contextual]": 1438,
+    "[contextual, point, contextual]": 268,
+    "[point, point, point]": 443
+  },
+  "precomputed_telemanom_run_ids": [
+    "2018-05-19_15.00.10"
+  ],
+  "precomputed_artifact_rows": 82,
+  "notes": [
+    "Anomaly intervals use zero-based inclusive endpoints.",
+    "Feature 0 is the telemetry target in the Telemanom input convention.",
+    "Remaining columns are command/context inputs in the Telemanom format.",
+    "No model was trained and no input data was modified by this audit.",
+    "Labels are attached to test sequences; they must not be used for fitting or threshold selection."
+  ],
+  "outputs": {
+    "channel_profile": "C:\\Users\\anura\\Desktop\\IIT Roorkee\\Sem 3\\Thesis\\QMLib\\experiments\\nasa_smap_msl\\results\\channel_profile.csv",
+    "feature_profile": "C:\\Users\\anura\\Desktop\\IIT Roorkee\\Sem 3\\Thesis\\QMLib\\experiments\\nasa_smap_msl\\results\\feature_profile.csv",
+    "anomaly_intervals": "C:\\Users\\anura\\Desktop\\IIT Roorkee\\Sem 3\\Thesis\\QMLib\\experiments\\nasa_smap_msl\\results\\anomaly_intervals.csv",
+    "telemanom_artifact_inventory": "C:\\Users\\anura\\Desktop\\IIT Roorkee\\Sem 3\\Thesis\\QMLib\\experiments\\nasa_smap_msl\\results\\telemanom_artifact_inventory.csv"
+  }
+}

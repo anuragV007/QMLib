@@ -1,0 +1,83 @@
+chan_id,spacecraft,train_rows,test_rows,num_features,num_anomaly_intervals,anomaly_types
+P-1,SMAP,2872,8505,25,3,"[contextual, contextual, contextual]"
+S-1,SMAP,2818,7331,25,1,[point]
+E-1,SMAP,2880,8516,25,2,"[contextual, contextual]"
+E-2,SMAP,2880,8532,25,1,[point]
+E-3,SMAP,2880,8307,25,1,[point]
+E-4,SMAP,2880,8354,25,1,[point]
+E-5,SMAP,2880,8294,25,1,[point]
+E-6,SMAP,2880,8300,25,1,[point]
+E-7,SMAP,2769,8310,25,1,[point]
+E-8,SMAP,2880,8532,25,1,[point]
+E-9,SMAP,2880,8302,25,1,[point]
+E-10,SMAP,2880,8505,25,2,"[contextual, contextual]"
+E-11,SMAP,2880,8514,25,2,"[contextual, contextual]"
+E-12,SMAP,2880,8512,25,2,"[contextual, contextual]"
+E-13,SMAP,2880,8640,25,3,"[contextual, contextual, contextual]"
+A-1,SMAP,2880,8640,25,1,[point]
+D-1,SMAP,2849,8509,25,1,[point]
+P-2,SMAP,2821,8209,25,1,[point]
+P-3,SMAP,2855,8493,25,1,[point]
+D-2,SMAP,2880,8595,25,1,[point]
+D-3,SMAP,2880,8640,25,1,[point]
+D-4,SMAP,2833,8473,25,1,[point]
+A-2,SMAP,2648,7914,25,1,[contextual]
+A-3,SMAP,2736,8205,25,1,[contextual]
+A-4,SMAP,2690,8080,25,1,[contextual]
+G-1,SMAP,2820,8469,25,1,[contextual]
+G-2,SMAP,2478,7361,25,1,[point]
+D-5,SMAP,2561,7628,25,1,[point]
+D-6,SMAP,2594,7884,25,1,[point]
+D-7,SMAP,2583,7642,25,1,[point]
+F-1,SMAP,2869,8584,25,1,[point]
+P-4,SMAP,2609,7783,25,3,"[point, point, point]"
+G-3,SMAP,2624,7907,25,1,[point]
+T-1,SMAP,2875,8612,25,2,"[point, contextual]"
+T-2,SMAP,2855,8625,25,1,[point]
+D-8,SMAP,2602,7874,25,1,[point]
+D-9,SMAP,2583,7406,25,1,[point]
+F-2,SMAP,2861,8626,25,1,[point]
+G-4,SMAP,2551,7632,25,1,[point]
+T-3,SMAP,2876,8579,25,2,"[point, point]"
+D-11,SMAP,2611,7431,25,1,[point]
+D-12,SMAP,312,7918,25,1,[point]
+B-1,SMAP,2435,8044,25,1,[point]
+G-6,SMAP,2881,8640,25,1,[point]
+G-7,SMAP,2446,8029,25,3,"[contextual, point, contextual]"
+P-7,SMAP,2853,8071,25,1,[contextual]
+R-1,SMAP,2874,7244,25,1,[point]
+A-5,SMAP,705,4693,25,1,[point]
+A-6,SMAP,682,4453,25,1,[point]
+A-7,SMAP,2879,8631,25,1,[contextual]
+D-13,SMAP,1490,7663,25,1,[point]
+P-2,SMAP,2821,8209,25,1,[point]
+A-8,SMAP,762,8375,25,1,[contextual]
+A-9,SMAP,762,8434,25,1,[contextual]
+F-3,SMAP,2880,8376,25,1,[contextual]
+M-6,MSL,1565,2049,55,1,[point]
+M-1,MSL,2209,2277,55,1,[contextual]
+M-2,MSL,2208,2277,55,1,[contextual]
+S-2,MSL,926,1827,55,1,[point]
+P-10,MSL,4308,6100,55,1,[point]
+T-4,MSL,2272,2217,55,1,[point]
+T-5,MSL,2272,2218,55,1,[point]
+F-7,MSL,2511,5054,55,3,"[contextual, contextual, contextual]"
+M-3,MSL,2037,2127,55,1,[contextual]
+M-4,MSL,2076,2038,55,1,[contextual]
+M-5,MSL,2032,2303,55,1,[contextual]
+P-15,MSL,3682,2856,55,1,[point]
+C-1,MSL,2158,2264,55,2,"[point, contextual]"
+C-2,MSL,764,2051,55,2,"[point, contextual]"
+T-12,MSL,1145,2430,55,1,[contextual]
+T-13,MSL,1145,2430,55,2,"[contextual, contextual]"
+F-4,MSL,2244,3422,55,1,[point]
+F-5,MSL,2598,3922,55,1,[point]
+D-14,MSL,3675,2625,55,2,"[point, point]"
+T-9,MSL,439,1096,55,2,"[point, point]"
+P-14,MSL,2880,6100,55,1,[point]
+T-8,MSL,748,1519,55,2,"[contextual, contextual]"
+P-11,MSL,3969,3535,55,2,"[point, point]"
+D-15,MSL,2074,2158,55,1,[point]
+D-16,MSL,1451,2191,55,1,[contextual]
+M-7,MSL,1587,2156,55,1,[point]
+F-8,MSL,3342,2487,55,1,[contextual]
