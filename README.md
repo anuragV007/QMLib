@@ -1,345 +1,233 @@
 # QMLib
 
-**A modular and extensible Quantum Machine Learning library.**
+**A modular Python library for composing Quantum Machine Learning workflows.**
 
-> **Status:** Development — v0.3.0
+> **Release target:** v0.4.0
 
-QMLib is a Python library for constructing Quantum Machine Learning (QML) workflows using modular and interchangeable quantum components.
+QMLib separates quantum data encoding, quantum-kernel computation, classical learning algorithms and pipeline composition. It is designed to make quantum components reusable and interchangeable without rewriting the complete machine-learning workflow.
 
-The project is inspired by the design philosophy of libraries such as scikit-learn, with an emphasis on:
+The current release focuses on **quantum-kernel methods** using PennyLane.
 
-* modularity
-* reusable components
-* interchangeable quantum methods
-* consistent APIs
-* backend abstraction
-* reproducible experimentation
+## What is implemented?
 
-## Vision
+| Layer | Components |
+|---|---|
+| Feature maps | `ZFeatureMap`, `ZZFeatureMap`, `PauliFeatureMap` |
+| Quantum kernels | `FidelityKernel`, `CachedFidelityKernel` |
+| Models | `QuantumClassifier`, `QuantumOneClassSVM`, `QuantumAnomalyDetector`, `QuantumKernelRidge` |
+| Backend | `PennyLaneBackend` |
+| Composition | `QMLPipeline` |
 
-QMLib aims to provide a common framework for constructing Quantum Machine Learning pipelines in which individual components can be replaced without rewriting the complete workflow.
+QMLib is a research prototype. The current backend implementation uses PennyLane devices; it is not yet a provider-independent abstraction across quantum SDKs.
 
-The long-term goal is to support multiple QML paradigms, including:
-
-* quantum kernel methods
-* variational quantum algorithms
-* quantum neural networks
-* quantum convolutional neural networks
-
-through common and composable interfaces.
-
----
-
-# Architecture
-
-QMLib is organized around the following conceptual architecture:
+## Architecture
 
 ```text
-                    QMLib
-                      │
-       ┌──────────────┼──────────────┐
-       │              │              │
-       ▼              ▼              ▼
- Feature Maps      Kernels         Models
-       │              │              │
-       └──────────────┼──────────────┘
-                      │
-                      ▼
-                   Backend
-                      │
-                      ▼
-               Quantum Runtime
+Classical feature vectors
+          |
+          v
+    Feature maps
+  Z / ZZ / Pauli
+          |
+          v
+    Quantum kernels
+ Fidelity / Cached Fidelity
+          |
+          v
+     QML estimators
+ Classifier / One-Class SVM /
+ Anomaly Detector / Kernel Ridge
+          |
+          v
+      QMLPipeline
+          |
+          v
+  PennyLane execution device
 ```
 
-The architecture separates:
+The kernel-based models are hybrid: quantum circuits generate the kernel similarities, while classical scikit-learn estimators perform the final SVM or kernel-ridge optimization.
 
-* data encoding
-* quantum similarity computation
-* machine learning models
-* quantum execution
+## Installation
 
-This allows individual components to evolve independently.
+Python 3.9 or later is required.
 
----
-
-# Current Components
-
-## Feature Maps
-
-Currently available:
-
-* `ZFeatureMap`
-* `ZZFeatureMap`
-* `PauliFeatureMap`
-
-Example:
-
-```python
-from qmlib.feature_maps import ZZFeatureMap
-
-feature_map = ZZFeatureMap(
-    n_qubits=4,
-    reps=2
-)
-```
-
----
-
-## Quantum Kernels
-
-Currently available:
-
-* `FidelityKernel`
-
-The fidelity kernel is defined as:
-
-$$
-K(x,y)=|\langle\phi(x)|\phi(y)\rangle|^2
-$$
-
-Example:
-
-```python
-from qmlib.kernels import FidelityKernel
-
-kernel = FidelityKernel(
-    feature_map=feature_map
-)
-```
-
----
-
-## Models
-
-Currently available:
-
-* `QuantumClassifier`
-
-The quantum classifier uses the quantum kernel to construct a kernel matrix and a classical SVM as the decision model.
-
-Example:
-
-```python
-from qmlib.models import QuantumClassifier
-
-model = QuantumClassifier(
-    kernel=kernel
-)
-
-model.fit(X_train, y_train)
-
-predictions = model.predict(X_test)
-```
-
----
-
-# Backend Abstraction
-
-QMLib separates quantum algorithms from the execution backend.
-
-Currently available:
-
-* `PennyLaneBackend`
-
-Example:
-
-```python
-from qmlib.backends import PennyLaneBackend
-
-backend = PennyLaneBackend()
-```
-
-The backend can then be supplied to a quantum kernel:
-
-```python
-kernel = FidelityKernel(
-    feature_map=feature_map,
-    backend=backend
-)
-```
-
-This architecture is designed to allow additional backends in future versions without changing the higher-level QML algorithm.
-
----
-
-# Plug-and-Play Feature Maps
-
-One of the main design goals of QMLib is component interchangeability.
-
-For example:
-
-```python
-feature_map = ZFeatureMap(
-    n_qubits=4
-)
-```
-
-can be replaced by:
-
-```python
-feature_map = ZZFeatureMap(
-    n_qubits=4
-)
-```
-
-or:
-
-```python
-feature_map = PauliFeatureMap(
-    n_qubits=4,
-    paulis=["X", "Z"]
-)
-```
-
-while keeping the same kernel and classifier:
-
-```python
-kernel = FidelityKernel(
-    feature_map=feature_map
-)
-
-model = QuantumClassifier(
-    kernel=kernel
-)
-
-model.fit(X_train, y_train)
-```
-
-This enables controlled comparison of different quantum feature representations.
-
----
-
-# Example
-
-```python
-from qmlib.feature_maps import ZZFeatureMap
-from qmlib.kernels import FidelityKernel
-from qmlib.models import QuantumClassifier
-
-feature_map = ZZFeatureMap(
-    n_qubits=4,
-    reps=2
-)
-
-kernel = FidelityKernel(
-    feature_map=feature_map
-)
-
-model = QuantumClassifier(
-    kernel=kernel
-)
-
-model.fit(
-    X_train,
-    y_train
-)
-
-predictions = model.predict(
-    X_test
-)
-```
-
----
-
-# Design Principles
-
-QMLib follows several architectural principles:
-
-### 1. Modularity
-
-Each major QML component is represented independently.
-
-### 2. Interchangeability
-
-Different implementations can be substituted through common interfaces.
-
-### 3. Separation of concerns
-
-Feature maps, kernels, models and execution backends have separate responsibilities.
-
-### 4. Reproducibility
-
-Components expose configuration information to support experiment tracking and reproducibility.
-
-### 5. Extensibility
-
-New QML algorithms should be implementable without modifying unrelated components.
-
----
-
-# Current Project Status
-
-QMLib is currently under active development.
-
-### Implemented
-
-* Feature-map abstraction
-* Z feature map
-* ZZ feature map
-* Pauli feature map
-* Quantum-kernel abstraction
-* Fidelity quantum kernel
-* Quantum-kernel classifier
-* Backend abstraction
-* PennyLane backend
-* Initial automated testing
-
-### Planned
-
-* Additional quantum kernels
-* Additional execution backends
-* Variational quantum classifiers
-* Quantum neural networks
-* Quantum convolutional neural networks
-* Pipeline abstraction
-* Benchmarking framework
-* Hardware execution
-* Performance and scalability analysis
-
----
-
-# Research Direction
-
-The library is being developed as part of an M.Tech thesis investigating the design of modular and extensible software abstractions for Quantum Machine Learning.
-
-The research will evaluate:
-
-* component interchangeability
-* model performance
-* execution time
-* circuit complexity
-* scalability
-* backend portability
-* reproducibility
-
-using representative QML datasets and workloads.
-
----
-
-# Development
-
-Clone the repository and install the package in editable mode:
-
-```bash
+```powershell
 git clone https://github.com/anuragV007/QMLib.git
 cd QMLib
 
 python -m venv .venv
-
-# Windows
 .venv\Scripts\activate
 
-pip install -e .
+python -m pip install -e ".[dev]"
 ```
 
-Run the test suite:
+## Quick start: quantum classification
 
-```bash
-pytest
+```python
+from qmlib.feature_maps import ZZFeatureMap
+from qmlib.kernels import FidelityKernel
+from qmlib.models import QuantumClassifier
+
+feature_map = ZZFeatureMap(n_qubits=2, reps=2)
+kernel = FidelityKernel(feature_map=feature_map)
+model = QuantumClassifier(kernel=kernel, C=1.0)
+
+model.fit(X_train, y_train)
+predictions = model.predict(X_test)
+print("Accuracy:", model.score(X_test, y_test))
 ```
 
----
+## Swap a feature map without changing the model
 
-# License
+Only the feature-map construction changes:
 
-This project is currently under development.
+```python
+from qmlib.feature_maps import ZFeatureMap
+# Alternatives: ZZFeatureMap, PauliFeatureMap
+
+feature_map = ZFeatureMap(n_qubits=2, reps=2)
+kernel = FidelityKernel(feature_map=feature_map)
+model = QuantumClassifier(kernel=kernel)
+```
+
+The same kernel and model interfaces can be retained.
+
+A runnable comparison is available in `examples/compare_feature_maps.py`.
+
+## Quick start: quantum-kernel regression
+
+```python
+from qmlib.feature_maps import ZZFeatureMap
+from qmlib.kernels import FidelityKernel
+from qmlib.models import QuantumKernelRidge
+
+feature_map = ZZFeatureMap(n_qubits=2, reps=1)
+kernel = FidelityKernel(feature_map=feature_map)
+regressor = QuantumKernelRidge(kernel=kernel, alpha=0.01)
+
+regressor.fit(X_train, y_train)
+predictions = regressor.predict(X_test)
+print("R²:", regressor.score(X_test, y_test))
+```
+
+A complete example is available in `examples/quantum_kernel_ridge_regression.py`.
+
+## Pipeline composition
+
+`QMLPipeline` composes classical preprocessing transformers with a final estimator. It supports both classification and regression by delegating `score()` to the final estimator.
+
+```python
+from sklearn.preprocessing import StandardScaler
+from qmlib.feature_maps import ZZFeatureMap
+from qmlib.kernels import FidelityKernel
+from qmlib.models import QuantumClassifier
+from qmlib.pipeline import QMLPipeline
+
+pipeline = QMLPipeline(
+    steps=[("scaler", StandardScaler())],
+    estimator=QuantumClassifier(
+        kernel=FidelityKernel(ZZFeatureMap(n_qubits=2))
+    ),
+)
+
+pipeline.fit(X_train, y_train)
+predictions = pipeline.predict(X_test)
+```
+
+Intermediate transformers must implement `fit(X)` and `transform(X)`. The final estimator must implement `fit(X, y)` and `predict(X)`. For scoring, it should implement `score(X, y)`.
+
+## Feature maps
+
+- **ZFeatureMap:** Hadamard preparation followed by data-dependent Z rotations.
+- **ZZFeatureMap:** Z rotations with nearest-neighbour entangling ZZ-style interactions.
+- **PauliFeatureMap:** Configurable single-qubit X, Y and Z data-dependent rotations.
+
+The current `PauliFeatureMap` is a basic configurable Pauli-rotation implementation; it should not be confused with every generalized Pauli evolution circuit used in other frameworks.
+
+## Quantum fidelity kernel
+
+For encoded quantum states \(\lvert\phi(x)\rangle\), QMLib computes:
+
+\[
+K(x,y)=|\langle \phi(x)\mid\phi(y)\rangle|^2
+\]
+
+`CachedFidelityKernel` caches statevectors for repeated input vectors. Call `clear_cache()` to release cached states when an experiment is complete.
+
+## Tests and examples
+
+Run the complete test suite:
+
+```powershell
+python -m pytest -q
+```
+
+Run the feature-map interchangeability example:
+
+```powershell
+python .\examples\compare_feature_maps.py
+```
+
+Run the regression example:
+
+```powershell
+python .\examples\quantum_kernel_ridge_regression.py
+```
+
+## Current limitations
+
+- The main execution path is PennyLane-based; cross-SDK backend portability is a future extension.
+- Current kernel computation is statevector-based and can become expensive as qubit count or training-set size increases.
+- Quantum-kernel models use classical SVM or kernel-ridge solvers after computing the quantum Gram matrix.
+- No quantum advantage is claimed. Classical baselines and resource measurements are required for every empirical comparison.
+- NASA SMAP/MSL experiments are research examples, not part of the core library API.
+
+## Research project
+
+QMLib is developed as part of an M.Tech thesis on modular and extensible Quantum Machine Learning software. The project evaluates component interchangeability, correctness, reproducibility, model performance and execution cost.
+
+## Repository structure
+
+```text
+src/qmlib/
+  backends/
+  feature_maps/
+  kernels/
+  models/
+  pipeline/
+
+examples/
+tests/
+benchmarks/
+experiments/
+```
+
+## Versioning
+
+The v0.4.0 release target consolidates quantum-kernel classification, one-class anomaly detection, kernel regression, cached fidelity evaluation and generic pipeline composition.
+
+
+## Novelty detectors
+
+`QuantumOneClassSVM` follows scikit-learn's One-Class SVM label convention
+(`+1` normal, `-1` anomaly) and also provides `anomaly_score(X)`.
+
+`QuantumAnomalyDetector` is a separate similarity-threshold detector. Its
+training method requires two normal sets:
+
+```python
+from qmlib.models import QuantumAnomalyDetector
+
+detector = QuantumAnomalyDetector(
+    kernel=kernel,
+    threshold_quantile=0.99,
+)
+detector.fit(reference_normal, calibration_normal)
+anomaly_scores = detector.score_samples(X_test)
+labels = detector.predict(X_test)  # 1 anomaly, 0 normal
+```
+
+The detector's two-input `fit(reference_X, calibration_X)` method is
+intentionally different from the `fit(X, y)` interface used by classifiers
+and regressors. It is not currently a drop-in final estimator for
+`QMLPipeline`.

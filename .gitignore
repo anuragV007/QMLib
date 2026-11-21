@@ -1,5 +1,30 @@
+# Python environments
 .venv/
+
+# Python generated files
 __pycache__/
-*.pyc
+*.py[cod]
+*.egg-info/
+
+# Testing and coverage
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# Jupyter
 .ipynb_checkpoints/
-src/qmlib.egg-info/
+
+# Build files
+build/
+dist/
+
+# Local dataset and downloaded archive
+NASA Data/
+archive.zip
+
+# Temporary local inspection file
+local_code_tree.txt
+
+# Large per-sample prediction outputs
+experiments/nasa_smap_msl/results/*_predictions.csv
